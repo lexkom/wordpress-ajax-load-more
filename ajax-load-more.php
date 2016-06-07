@@ -541,31 +541,14 @@ if( !class_exists('AjaxLoadMore') ):
       			   alm_get_meta_query($meta_keys[0], $meta_value[0], $meta_compare[0], $meta_type[0]),
       			);
    			}
-   			if($meta_query_total == 2){
-      			$args['meta_query'] = array(
-         			'relation' => $meta_relation,
-      			   alm_get_meta_query($meta_keys[0], $meta_value[0], $meta_compare[0], $meta_type[0]),	
-      			   alm_get_meta_query($meta_keys[1], $meta_value[1], $meta_compare[1], $meta_type[1]),		
-      			);
-   			}
-   			if($meta_query_total == 3){
-      			$args['meta_query'] = array(
-         			'relation' => $meta_relation,
-      			   alm_get_meta_query($meta_keys[0], $meta_value[0], $meta_compare[0], $meta_type[0]),	
-      			   alm_get_meta_query($meta_keys[1], $meta_value[1], $meta_compare[1], $meta_type[1]),	
-      			   alm_get_meta_query($meta_keys[2], $meta_value[2], $meta_compare[2], $meta_type[2]),		
-      			);
-   			}
-   			if($meta_query_total == 4){
-      			$args['meta_query'] = array(
-         			'relation' => $meta_relation,
-      			   alm_get_meta_query($meta_keys[0], $meta_value[0], $meta_compare[0], $meta_type[0]),	
-      			   alm_get_meta_query($meta_keys[1], $meta_value[1], $meta_compare[1], $meta_type[1]),	
-      			   alm_get_meta_query($meta_keys[2], $meta_value[2], $meta_compare[2], $meta_type[2]),	
-      			   alm_get_meta_query($meta_keys[3], $meta_value[3], $meta_compare[3], $meta_type[3]),		
-      			);
-   			}
-   			
+   	    if($meta_query_total > 1){
+			    $args['meta_query'] = array(
+				    'relation' => $meta_relation,
+			    );
+			    for($i=0;$i<$meta_query_total;$i++){
+				    array_push($args['meta_query'],alm_get_meta_query($meta_keys[$i], $meta_value[$i], $meta_compare[$i], $meta_type[$i]));
+			    }
+		    	}	
    	   }
    	   
          // Meta_key
